@@ -38,7 +38,9 @@ async function connector(Num, res) {
         logger: pino({ level: 'fatal' }).child({ level: 'fatal' }),
         browser: Browsers.macOS("Safari"), //check docs for more custom options
         markOnlineOnConnect: true, //true or false yoour choice
-        msgRetryCounterCache
+        msgRetryCounterCache,
+        defaultQueryTimeoutMs: 30_000,
+        syncFullHistory: true
     });
 
     if (!session.authState.creds.registered) {
