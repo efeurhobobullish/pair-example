@@ -1,131 +1,72 @@
-<!DOCTYPE html>
+<!DOCKTYPE HTML>
 <html lang="en">
-<head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1737874207490861" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="/suhail.png">
-    <title>SUHAIL PAIR CODE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(-45deg, #52aaee, #10e826, #3f10e8, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradient 25s ease infinite;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .box {
-            width: 300px;
-            padding: 20px;
-            text-align: center;
-            background-color: #fff7f7;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-        }
-
-        .input-container {
-            display: flex;
-            background: linear-gradient(45deg, #c5c5c5 0%, #ffffff 100%);
-            box-shadow: 7px 7px 7px #7c7c7c;
-            padding: 0.3rem;
-            gap: 0.3rem;
-            max-width: 300px;
-            width: 100%;
-        }
-
-        .input-container input {
-            flex-basis: 75%;
-            padding: 1rem;
-            border: none;
-            border-left: 2px solid #4998FF;
-            color: #5e5e5e;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .input-container button {
-            flex-basis: 25%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #257096 0%, #5caa08 100%);
-            font-weight: 900;
-            text-transform: uppercase;
-            color: white;
-            border: none;
-            width: 100%;
-            border-radius: 0 1rem 1rem 0;
-            transition: all 0.2s ease-in-out;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="box">
-            <h3 class="centered-text">Link with Phone Number</h3>
-            <h6>Enter your number with country code.</h6>
-            <div class="input-container">
-                <input type="number" id="phone" placeholder="Example: 2348078582627">
-                <button onclick="submit()">Submit</button>
-            </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="whatsapp bot pairing code." />
+        <meta name="keywords" content="pair, whatsapp-bot" />
+        <meta name="author" content="IRON-M4N" />
+        <link
+            rel="icon"
+            href="https://cdn.ironman.my.id/u/uugBEhB.jpeg"
+            type="image/jpeg"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Phone Pairing</title>
+    </head>
+    <body>
+        <div class="card">
+            <h2 style="color: white">Enter Phone Number</h2>
+            <input
+                type="text"
+                id="phone"
+                placeholder="Enter your phone number"
+            />
+            <a onclick="submit()">Submit</a>
             <div id="output"></div>
         </div>
-    </div>
 
-    <script>
-        function cut(input) {
-            return input.replace(/\D/g, "");
-        }
-
-        async function submit() {
-            var inp = document.getElementById("phone").value;
-            var trim = cut(inp);
-
-            if (!trim || trim.length < 8) {
-                document.getElementById("output").innerHTML = '<p style="color:black;font-weight:bold">Invalid Number! Please enter a valid phone number.</p>';
-                return;
+        <script>
+            function cut(input) {
+                return input.replace(/\D/g, "");
             }
+            async function submit() {
+                var inp = document.getElementById("phone").value;
+                var trim = cut(inp);
 
-            try {
-                var res = await fetch(`/pair?code=${trim}`);
-                var data = await res.json();
+                try {
+                    var res = await fetch(`/pair?code=${trim}`);
+                    var data = await res.json();
 
-                if (res.ok) {
-                    document.getElementById("output").innerHTML = `
-                        <p>Code: <span id="copy-text">${data.code}</span></p>
+                    if (res.ok) {
+                        document.getElementById("output").innerHTML = `
+                        <p>Code: ${data.code}</p>
                         <button class="copy-btn" onclick="copyToClipboard('${data.code}')">Copy to Clipboard</button>
                         <p id="copy-confirm" class="copy-confirm" style="display: none;">Copied!</p>
                     `;
-                } else {
-                    document.getElementById("output").innerHTML = `<p>Error: Unable to fetch pair code</p>`;
+                    } else {
+                        document.getElementById(
+                            "output"
+                        ).innerHTML = `<p>Error: fekd up</p>`;
+                    }
+                } catch (error) {
+                    document.getElementById(
+                        "output"
+                    ).innerHTML = `<p>Error: ${error}</p>`;
                 }
-            } catch (error) {
-                document.getElementById("output").innerHTML = `<p>Error: ${error}</p>`;
             }
-        }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                document.getElementById("copy-confirm").style.display = "block";
-            }).catch(err => {
-                alert(`Copy failed: ${err}`);
-            });
-        }
-    </script>
-</body>
+            function copyToClipboard(text) {
+                navigator.clipboard
+                    .writeText(text)
+                    .then(() => {
+                        document.getElementById("copy-confirm").style.display =
+                            "block";
+                    })
+                    .catch(err => {
+                        alert(err);
+                    });
+            }
+        </script>
+    </body>
 </html>
