@@ -2,7 +2,7 @@ const { File } = require('megajs');
 const fs = require('fs');
 
 var prefix = "𝙴𝙼𝙿𝙸𝚁𝙴-𝙼𝙳"; //your prefix same as in config.PREFIX
-var output = "./session/"; //path where the creds.json will save
+var output = "./auth_info_baileys/"; //path where the creds.json will save
 
 async function saveCreds(id) {
   if (!id.startsWith(prefix)) {
