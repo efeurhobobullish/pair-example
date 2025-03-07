@@ -16,14 +16,14 @@ const config = require('./config');
 const path = require('path');
 
 var app = express();
-var port = 3000;
+var port = 8000;
 var session;
 const msgRetryCounterCache = new NodeCache();
 const mutex = new Mutex();
 app.use(express.static(path.join(__dirname, 'static')));
 
 async function connector(Num, res) {
-    var sessionDir = './session';
+    var sessionDir = './auth_info_baileys';
     if (!fs.existsSync(sessionDir)) {
         fs.mkdirSync(sessionDir);
     }
@@ -62,7 +62,7 @@ async function connector(Num, res) {
             console.log('Connected successfully');
             await delay(5000);
             var myr = await session.sendMessage(session.user.id, { text: `${config.MESSAGE}` });
-            var pth = './session/creds.json';
+            var pth = './auth_info_baileys/creds.json';
             try {
                 var url = await upload(pth);
                 var sID;
@@ -78,8 +78,8 @@ async function connector(Num, res) {
                 console.error('Error:', error);
             } finally {
                 //await delay(500);
-                if (fs.existsSync(path.join(__dirname, './session'))) {
-                    fs.rmdirSync(path.join(__dirname, './session'), { recursive: true });
+                if (fs.existsSync(path.join(__dirname, './auth_info_baileys'))) {
+                    fs.rmdirSync(path.join(__dirname, './auth_info_baileys'), { recursive: true });
                 }
             }
         } else if (connection === 'close') {
